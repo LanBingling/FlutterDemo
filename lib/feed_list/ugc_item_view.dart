@@ -9,17 +9,26 @@ class _UGCItemState extends State<UGCItem> {
 
   /// UGC 大图
   Widget _getUGCCover() {
-    return ClipRRect(
-      child: Image.network(
-        'https://uploadbeta.com/api/pictures/random',
-        width: 280,
-        height: 300,
-        fit: BoxFit.cover,
-      ),
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(10),
-        topRight: Radius.circular(10),
-      ),
+    return Stack(
+      overflow: Overflow.visible, /// 超出父布局时怎么处理
+      children: <Widget>[
+        ClipRRect(
+          child: Image.network(
+            'https://uploadbeta.com/api/pictures/random',
+            height: 250,
+            fit: BoxFit.cover,
+          ),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+          ),
+        ),
+        Positioned(
+          child: Icon(Icons.image,),
+          left: 2.0,
+          bottom: -10.0,
+        ),
+      ],
     );
   }
 
