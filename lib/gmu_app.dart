@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_from_0to1_demo/feed_list/ugc_item_view.dart';
+import 'package:flutter_from_0to1_demo/feed_list/ugc_staggered_view.dart';
 
 class GmuApp extends StatelessWidget {
   @override
@@ -31,8 +32,8 @@ class _FeedListPageState extends State<FeedListPage> {
         centerTitle: true,
       ),
       body: Container(
-        color: Colors.black12,
-        child: Center(child: UGCItem()),
+        color: Color.fromARGB(0xFF, 0xFB, 0xFB, 0xFB),
+        child: Center(child: UGCStaggeredView()),
       ),
     );
   }

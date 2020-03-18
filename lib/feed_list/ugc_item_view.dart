@@ -11,7 +11,7 @@ class _UGCItemState extends State<UGCItem> {
   Widget _getUGCCover() {
     return ClipRRect(
       child: Image.network(
-        'http://n.sinaimg.cn/sports/2_img/upload/cf0d0fdd/107/w1024h683/20181128/pKtl-hphsupx4744393.jpg',
+        'https://uploadbeta.com/api/pictures/random',
         width: 280,
         height: 300,
         fit: BoxFit.cover,
@@ -52,7 +52,7 @@ class _UGCItemState extends State<UGCItem> {
             height: 30,
             child: ClipOval(
               child: Image.network(
-                'http://n.sinaimg.cn/sports/2_img/upload/cf0d0fdd/107/w1024h683/20181128/pKtl-hphsupx4744393.jpg',
+                'https://uploadbeta.com/api/pictures/random/?key=%E6%8E%A8%E5%A5%B3%E9%83%8E',
                 fit: BoxFit.cover,
               ),
             ),
@@ -89,6 +89,16 @@ class _UGCItemState extends State<UGCItem> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey[300],
+                offset: Offset(0.5, 0.5), /// 阴影xy轴偏移量
+                blurRadius: 3.0, /// 阴影模糊程度
+              ),
+              BoxShadow(color: Colors.grey[300], offset: Offset(-0.5, -0.5), blurRadius: 3),
+              BoxShadow(color: Colors.grey[300], offset: Offset(0.5, -0.5), blurRadius: 3),
+              BoxShadow(color: Colors.grey[300], offset: Offset(-0.5, 0.5), blurRadius: 3),
+            ],
           ),
           width: 280,
           child: Column(
