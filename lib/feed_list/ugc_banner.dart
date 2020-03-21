@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class FeedBanner extends StatefulWidget {
+class UGCBanner extends StatefulWidget {
   @override
-  _FeedBannerState createState() => _FeedBannerState();
+  _UGCBannerState createState() => _UGCBannerState();
 }
 
-class _FeedBannerState extends State<FeedBanner> {
+class _UGCBannerState extends State<UGCBanner> {
   @override
   Widget build(BuildContext context) {
     return Padding(

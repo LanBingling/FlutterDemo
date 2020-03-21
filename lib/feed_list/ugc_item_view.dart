@@ -13,10 +13,11 @@ class _UGCItemState extends State<UGCItem> {
       overflow: Overflow.visible, /// 超出父布局时怎么处理
       children: <Widget>[
         ClipRRect(
-          child: Image.network(
-            'https://uploadbeta.com/api/pictures/random',
+          child: Image.asset(
+            'assets/images/ugc.jpg',/*https://uploadbeta.com/api/pictures/random*/
             height: 250,
-            fit: BoxFit.cover,
+            width: double.infinity,
+            fit: BoxFit.fitWidth,
           ),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(10),
@@ -24,9 +25,13 @@ class _UGCItemState extends State<UGCItem> {
           ),
         ),
         Positioned(
-          child: Icon(Icons.image,),
-          left: 2.0,
+          width: 50.0,
+          height: 20.0,
+          left: -2.0,
           bottom: -10.0,
+          child: Image.asset(
+            "assets/images/feed_tag.png",
+          ),
         ),
       ],
     );
@@ -100,13 +105,15 @@ class _UGCItemState extends State<UGCItem> {
             color: Colors.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.grey[300],
-                offset: Offset(0.5, 0.5), /// 阴影xy轴偏移量
-                blurRadius: 3.0, /// 阴影模糊程度
+                color: Colors.grey[200],
+                /// 阴影xy轴偏移量
+                offset: Offset(0.5, 0.5),
+                /// 阴影模糊程度
+                blurRadius: 3.0,
               ),
-              BoxShadow(color: Colors.grey[300], offset: Offset(-0.5, -0.5), blurRadius: 3),
-              BoxShadow(color: Colors.grey[300], offset: Offset(0.5, -0.5), blurRadius: 3),
-              BoxShadow(color: Colors.grey[300], offset: Offset(-0.5, 0.5), blurRadius: 3),
+              BoxShadow(color: Colors.grey[200], offset: Offset(-0.5, -0.5), blurRadius: 3),
+              BoxShadow(color: Colors.grey[200], offset: Offset(0.5, -0.5), blurRadius: 3),
+              BoxShadow(color: Colors.grey[200], offset: Offset(-0.5, 0.5), blurRadius: 3),
             ],
           ),
           width: 280,
