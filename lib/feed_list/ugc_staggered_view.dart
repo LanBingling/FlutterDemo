@@ -27,10 +27,17 @@ class _UGCStaggeredViewState extends State<UGCStaggeredView> {
           crossAxisCount: 2,
           itemCount: 12,
           itemBuilder: (BuildContext context, int index) {
-            if (index == 0
-                || index == 2 || index == 3
-                || index == 7 || index == 8) {
-              return UGCBanner();
+            if (index == 0) {
+              return UGCBanner(
+                onPageSelected: (s) {},
+                onPageClicked: (c) {},
+              );
+            } else if (index == 2 || index == 3 || index == 7 || index == 8) {
+              return UGCBanner(
+                onPageSelected: (s) {},
+                onPageClicked: (c) {},
+                autoDisplayInterval: 0,
+              );
             } else {
               return UGCItem();
             }
