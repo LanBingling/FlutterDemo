@@ -91,7 +91,6 @@ class _UGCBannerState extends State<UGCBanner> {
             duration: Duration(milliseconds: 500),
             curve: Curves.linear,
           );
-          _onPageChanged(_selectedPage);
         });
   }
 

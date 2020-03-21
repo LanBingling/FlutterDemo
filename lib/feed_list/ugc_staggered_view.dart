@@ -17,7 +17,6 @@ class _UGCStaggeredViewState extends State<UGCStaggeredView> {
   void initState() {
     super.initState();
     _model = DataUtil.getUGCModel();
-    print('${_model.cards.length}');
   }
 
   _getSpan(int index) {
@@ -39,8 +38,12 @@ class _UGCStaggeredViewState extends State<UGCStaggeredView> {
           itemBuilder: (BuildContext context, int index) {
             if (index == 0) {
               return UGCBanner(
-                onPageSelected: (s) {},
-                onPageClicked: (c) {},
+                onPageSelected: (s) {
+                  print('选中：$s');
+                },
+                onPageClicked: (c) {
+                  print('点击：$c');
+                },
               );
             } else {
               return UGCItem(_model.cards[index].card_info);
