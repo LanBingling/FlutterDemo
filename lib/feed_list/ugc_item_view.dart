@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_from_0to1_demo/feed_list/ugc_model.dart';
 
 class UGCItem extends StatefulWidget {
+
+  UGCItem(this.cardInfo);
+
+  final CardInfo cardInfo;
+
   @override
   _UGCItemState createState() => _UGCItemState();
 }
@@ -13,11 +19,11 @@ class _UGCItemState extends State<UGCItem> {
       overflow: Overflow.visible, /// 超出父布局时怎么处理
       children: <Widget>[
         ClipRRect(
-          child: Image.asset(
-            'assets/images/ugc.jpg',/*https://uploadbeta.com/api/pictures/random*/
+          child: Image.network(
+            widget.cardInfo.feed_info.content.attachments[0].data.url/*'assets/images/ugc.jpg'*/,/*https://uploadbeta.com/api/pictures/random*/
             height: 250,
             width: double.infinity,
-            fit: BoxFit.fitWidth,
+            fit: BoxFit.fitHeight,
           ),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(10),
@@ -38,25 +44,30 @@ class _UGCItemState extends State<UGCItem> {
   }
 
   Widget _getUGCDesc() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 9.0, vertical: 12.0),
-      child: Text(
-        '具惠善日本东京街头拍写真-秋日里浓浓文艺氛围氛围-具惠善日本东京街头拍写真-秋日里浓浓文艺氛围氛围',
-        style: TextStyle(
-          fontSize: 16.0,
-          color: Colors.black,
+    if (widget.cardInfo.feed_info.content.title.length == 0) {
+      return SizedBox(height: 12.0,);
+    } else {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 9.0, vertical: 12.0),
+        child: Text(
+          widget.cardInfo.feed_info.content.title,
+          style: TextStyle(
+            fontSize: 16.0,
+            color: Colors.black,
+          ),
+          textDirection: TextDirection.ltr,
+          /// 文字最大行数
+          maxLines: 2,
+          /// 文字显示不下时, 结尾显示 ...
+          overflow: TextOverflow.ellipsis,
         ),
-        /// 文字最大行数
-        maxLines: 2,
-        /// 文字显示不下时, 结尾显示 ...
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
+      );
+    }
   }
 
   Widget _getUGCUserInfo() {
     return Padding(
-      padding: const EdgeInsets.only(left: 9.0, top: 3.0, right: 9.0, bottom: 15.0),
+      padding: const EdgeInsets.only(left: 9.0, top: 3.0, right: 9.0, bottom: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -66,24 +77,27 @@ class _UGCItemState extends State<UGCItem> {
             height: 30,
             child: ClipOval(
               child: Image.network(
-                'https://uploadbeta.com/api/pictures/random/?key=%E6%8E%A8%E5%A5%B3%E9%83%8E',
+                widget.cardInfo.feed_info.user.avatar/*'https://uploadbeta.com/api/pictures/random/?key=%E6%8E%A8%E5%A5%B3%E9%83%8E'*/,
                 fit: BoxFit.cover,
               ),
             ),
           ),
           Container(width: 10.0,),
-          Text(
-            '野比大雄',
-            style: TextStyle(
-              fontSize: 13.0,
-              color: Color.fromARGB(0xFF, 0x96, 0x96, 0x96),
+          Expanded(
+            child: Text(
+              widget.cardInfo.feed_info.user.nickname,
+              style: TextStyle(
+                fontSize: 13.0,
+                color: Color.fromARGB(0xFF, 0x96, 0x96, 0x96),
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
-          Expanded(child: Container(),),
           Icon(Icons.star_border,),
           Container(width: 5.0,),
           Text(
-            '233',
+            '${widget.cardInfo.feed_info.like_num}',
             style: TextStyle(
               fontSize: 13.0,
               color: Color.fromARGB(0xFF, 0x96, 0x96, 0x96),
@@ -96,36 +110,39 @@ class _UGCItemState extends State<UGCItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey[200],
-                /// 阴影xy轴偏移量
-                offset: Offset(0.5, 0.5),
-                /// 阴影模糊程度
-                blurRadius: 3.0,
-              ),
-              BoxShadow(color: Colors.grey[200], offset: Offset(-0.5, -0.5), blurRadius: 3),
-              BoxShadow(color: Colors.grey[200], offset: Offset(0.5, -0.5), blurRadius: 3),
-              BoxShadow(color: Colors.grey[200], offset: Offset(-0.5, 0.5), blurRadius: 3),
-            ],
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(12.0)),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey[200],
+                  /// 阴影xy轴偏移量
+                  offset: Offset(0.5, 0.5),
+                  /// 阴影模糊程度
+                  blurRadius: 3.0,
+                ),
+                BoxShadow(color: Colors.grey[200], offset: Offset(-0.5, -0.5), blurRadius: 3.0),
+                BoxShadow(color: Colors.grey[200], offset: Offset(0.5, -0.5), blurRadius: 3.0),
+                BoxShadow(color: Colors.grey[200], offset: Offset(-0.5, 0.5), blurRadius: 3.0),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                _getUGCCover(),
+                _getUGCDesc(),
+                _getUGCUserInfo(),
+              ],
+            ),
           ),
-          width: 280,
-          child: Column(
-            children: <Widget>[
-              _getUGCCover(),
-              _getUGCDesc(),
-              _getUGCUserInfo(),
-            ],
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

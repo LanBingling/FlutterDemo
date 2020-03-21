@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_from_0to1_demo/feed_list/ugc_banner.dart';
 import 'package:flutter_from_0to1_demo/feed_list/ugc_item_view.dart';
+import 'package:flutter_from_0to1_demo/feed_list/ugc_model.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class UGCStaggeredView extends StatefulWidget {
@@ -9,6 +10,15 @@ class UGCStaggeredView extends StatefulWidget {
 }
 
 class _UGCStaggeredViewState extends State<UGCStaggeredView> {
+
+  UGCModel _model;
+
+  @override
+  void initState() {
+    super.initState();
+    _model = DataUtil.getUGCModel();
+    print('${_model.cards.length}');
+  }
 
   _getSpan(int index) {
     if (index == 0) {
@@ -32,19 +42,13 @@ class _UGCStaggeredViewState extends State<UGCStaggeredView> {
                 onPageSelected: (s) {},
                 onPageClicked: (c) {},
               );
-            } else if (index == 2 || index == 3 || index == 7 || index == 8) {
-              return UGCBanner(
-                onPageSelected: (s) {},
-                onPageClicked: (c) {},
-                autoDisplayInterval: 0,
-              );
             } else {
-              return UGCItem();
+              return UGCItem(_model.cards[index].card_info);
             }
           },
           staggeredTileBuilder: (int index) => StaggeredTile.fit(_getSpan(index)),
-          mainAxisSpacing: 8.0,
-          crossAxisSpacing: 8.0,
+          mainAxisSpacing: 4.0,
+          crossAxisSpacing: 4.0,
         ),
       ),
     );
