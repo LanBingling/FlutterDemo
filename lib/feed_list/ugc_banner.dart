@@ -36,7 +36,7 @@ class _UGCBannerState extends State<UGCBanner> {
   Timer _timer;
   var _images = {
     "http://ww1.sinaimg.cn/large/610dc034ly1ffmwnrkv1hj20ku0q1wfu.jpg",
-    "http://avatar.cdn.gmugmu.com/8317650_48P63K",
+    "http://avatar.cdn.gmugmu.com/12573300_913483",
     "http://avatar.cdn.gmugmu.com/6531288_561506",
     "http://avatar.cdn.gmugmu.com/6962257_408YNn"};
 
@@ -115,10 +115,7 @@ class _UGCBannerState extends State<UGCBanner> {
           child: PageView(
             controller: _controller,
             children: _images.map((img) {
-              return ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                child: Image.network(img,fit: BoxFit.fitWidth,),
-              );
+              return Image.network(img,fit: BoxFit.cover,);
             }).toList(),
             scrollDirection: widget.scrollDirection,
             onPageChanged: _onPageChanged,
